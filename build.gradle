@@ -10,7 +10,7 @@ repositories {
 def allureVersion = "2.17.3",
     selenideVersion = "6.4.0",
     junitVersion = "5.8.2",
-    slf4jVersion = '1.7.36'
+    slf4jVersion = "1.7.32"
 
 allure {
     report {
@@ -29,8 +29,8 @@ allure {
 dependencies {
     testImplementation(
             "com.codeborne:selenide:$selenideVersion",
-            "com.github.javafaker:javafaker:1.0.2",
             "io.qameta.allure:allure-selenide:$allureVersion",
+            "org.aeonbits.owner:owner:1.0.12",
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion"
     )
@@ -41,6 +41,7 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties()) // позволяет входить данным ( Швейцар)
     useJUnitPlatform()
 
     testLogging {
@@ -50,11 +51,28 @@ tasks.withType(Test) {
         }
     }
 }
-// gradle clean demoqa_tests запустит только этот тест из терминала.
-// Вот это сделан отдельный класс под тегом demoqa
+
 task demoqa_tests(type: Test) {
     useJUnitPlatform{
         includeTags "demoqa"
 //        excludeTags "simple"
+    }
+}
+
+task test5(type: Test) {
+    useJUnitPlatform{
+        includeTags "test5"
+    }
+}
+
+task systemProperties(type: Test) {
+    useJUnitPlatform{
+        includeTags "systemProperties"
+    }
+}
+
+task owner(type: Test) {
+    useJUnitPlatform{
+        includeTags "owner"
     }
 }
