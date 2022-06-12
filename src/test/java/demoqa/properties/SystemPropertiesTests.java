@@ -1,14 +1,14 @@
 package demoqa.properties;
 
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("systemProperties")
 public class SystemPropertiesTests {
-
     @Test
     void someTest1() {
-        String browser = System.getProperty("browser"); // Хранилище КЛЮЧ - ЗНАЧЕНИЕ
+        String browser = System.getProperty("browser");
         System.out.println(browser); // null
     }
 
@@ -27,10 +27,9 @@ public class SystemPropertiesTests {
 
     @Test
     void someTest4() {
-        System.setProperty("browser", "safari"); // 1)Установили в хранилище browser = safari
-        String browser = System.getProperty("browser", "opera"); // взяли из хранилища properties по ключу b-r
+        System.setProperty("browser", "safari");
+        String browser = System.getProperty("browser", "opera");
         System.out.println(browser); // safari
-
     }
 
     @Test
@@ -44,7 +43,7 @@ public class SystemPropertiesTests {
         System.out.println(version);
         System.out.println(browserSize);
 
-         /*
+        /*
            gradle clean test5
                 chrome
                 100
@@ -61,8 +60,4 @@ public class SystemPropertiesTests {
         System.out.println("I want to say: " + System.getProperty("anyText"));
     }
 }
-
-
-
-
 
